@@ -1,21 +1,4 @@
----
-page_type: sample
-languages:
-- azdeveloper
-- python
-- terraform
-- typescript
-- html
-products:
-- azure
-- azure-cosmos-db
-- azure-app-service
-- azure-monitor
-- azure-pipelines
-urlFragment: todo-python-mongo-terraform
-name: React Web App with Python API and MongoDB (Terraform) on Azure
-description: A complete ToDo app with Python FastAPI and Azure Cosmos API for MongoDB for storage. Uses Azure Developer CLI (azd) to build, deploy, and monitor
----
+
 <!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
 
 # React Web App with Python API and MongoDB (Terraform) on Azure
