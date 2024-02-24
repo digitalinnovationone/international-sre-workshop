@@ -11,7 +11,7 @@ terraform {
     }
   }
 
-  backend "remote" {
+  backend "azurerm" {
     # Empty since we will configure this dynamically in GitHub Actions
   }
 }
