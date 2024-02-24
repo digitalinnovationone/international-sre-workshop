@@ -19,7 +19,7 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
     environment: 
-      name: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
+      name: ${{ github.ref == 'refs/heads/main' && 'prd' || 'dev' }}
 
     defaults:
       run:
@@ -68,7 +68,7 @@ jobs:
     needs: terraform
     runs-on: ubuntu-latest     
     environment:
-      name: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
+      name: ${{ github.ref == 'refs/heads/main' && 'prd' || 'dev' }}
     defaults:
       run:
         working-directory: infra/infra-example
