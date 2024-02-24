@@ -12,7 +12,7 @@ terraform {
   }
 
   backend "azurerm" {
-    # Empty since we will configure this dynamically in GitHub Actions
+    # Empty since we will configure this dynamically in GitHub Actions 
   }
 }
 
