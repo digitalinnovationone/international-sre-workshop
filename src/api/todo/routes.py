@@ -6,6 +6,7 @@ from urllib.parse import urljoin
 from beanie import PydanticObjectId
 from fastapi import HTTPException, Response
 from starlette.requests import Request
+import time
 
 from .app import app
 from .models import (CreateUpdateTodoItem, CreateUpdateTodoList, TodoItem,
@@ -25,6 +26,7 @@ async def get_lists(
     - **skip**: Number of lists to skip
     """
     query = TodoList.all().skip(skip).limit(top)
+    time.sleep(120)
     return await query.to_list()
 
 
@@ -43,6 +45,7 @@ async def get_list(list_id: PydanticObjectId) -> TodoList:
     """
     Get Todo list by ID
     """
+    raise HTTPException(status_code=500, detail="Internal Server Error")
     todo_list = await TodoList.get(document_id=list_id)
     if not todo_list:
         raise HTTPException(status_code=404, detail="Todo list not found")
