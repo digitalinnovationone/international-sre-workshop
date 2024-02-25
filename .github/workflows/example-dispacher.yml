@@ -20,7 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: ${{ github.ref == 'refs/heads/main' && 'prd' || 'dev' }}
-
+    env:
+      ENV_NAME: ${{ github.ref == 'refs/heads/main' && 'prd' || 'dev' }}
     defaults:
       run:
         working-directory: infra/infra-example
@@ -51,7 +52,7 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan  -var-file="vars/${{ inputs.environment }}.tfvars" -out="terraform.tfplan"
+        run: terraform plan  -var-file="vars/${{ env.ENV_NAME }}.tfvars" -out="terraform.tfplan"
         
         env:
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -78,7 +79,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.5.x
+          terraform_version: 1.7.x
           terraform_wrapper: false
 
       - name: Download Terraform Plan
