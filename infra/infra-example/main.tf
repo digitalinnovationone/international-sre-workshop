@@ -30,7 +30,7 @@ resource "azurerm_linux_web_app" "web" {
   name                = azurecaf_name.web_name.result
   location            = var.default_location
   resource_group_name = var.rg_name
-  service_plan_id     = var.appservice_plan_id
+  service_plan_id     = azurerm_service_plan.plan.id
   https_only          = true
 
     site_config {
