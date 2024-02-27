@@ -1,10 +1,6 @@
 name: 'Terraform Deploy example infra to Azure'
 
 on:
-  push:
-    branches:
-      - main # or any other branch you want to deploy from 
-      - '*'
   pull_request:
     branches:
       - main
