@@ -1,21 +1,22 @@
+# DIO SRE Workshop
 
-<!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
+This repo was created based on the Microsoft's template [Azure-Samples/todo-python-mongo-terraform](htps://github.com/Azure-Samples/todo-python-mongo-terraform) to support the DIO SRE Workshop.
 
 # React Web App with Python API and MongoDB (Terraform) on Azure
 
-[![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=brightgreen&logo=github)](https://codespaces.new/azure-samples/todo-python-mongo-terraform)
-[![Open in Dev Container](https://img.shields.io/static/v1?style=for-the-badge&label=Dev+Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/azure-samples/todo-python-mongo-terraform)
+[![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=brightgreen&logo=github)](https://codespaces.new/tanure/todo-python-mongo-terraform)
+[![Open in Dev Container](https://img.shields.io/static/v1?style=for-the-badge&label=Dev+Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/tanure/todo-python-mongo-terraform)
 
-A blueprint for getting a React web app with Python (FastAPI) API and a MongoDB database running on Azure. The blueprint includes sample application code (a ToDo web app) which can be removed and replaced with your own application code. Add your own source code and leverage the Infrastructure as Code assets (written in Terraform) to get up and running quickly.
-
-Let's jump in and get this up and running in Azure. When you are finished, you will have a fully functional web app deployed to the cloud. In later steps, you'll see how to setup a pipeline and monitor the application.
+The wowkshop is based on a React web app with Python (FastAPI) API and a MongoDB database running on Azure. 
 
 !["Screenshot of deployed ToDo app"](assets/web.png)
 
 <sup>Screenshot of the deployed ToDo app</sup>
 
 ### Prerequisites
-> This template will create infrastructure and deploy code to Azure. If you don't have an Azure Subscription, you can sign up for a [free account here](https://azure.microsoft.com/free/). Make sure you have contributor role to the Azure subscription.
+> **Please:** To be able to reproduce all tasks mentioned on this repo, first, Firk this repository for your own GitHub account.
+
+> With this repository you're able to create infrastructure and deploy code to Azure. If you don't have an Azure Subscription, you can sign up for a [free account here](https://azure.microsoft.com/free/). Make sure you have *contributor* role to the Azure subscription.
 
 
 The following prerequisites are required to use this application. Please ensure that you have them all installed locally.
@@ -27,9 +28,16 @@ The following prerequisites are required to use this application. Please ensure 
     - Requires the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)
 
 ### Quickstart
-To learn how to get started with any template, follow the steps in [this quickstart](https://learn.microsoft.com/azure/developer/azure-developer-cli/get-started?tabs=localinstall&pivots=programming-language-python) with this template(`Azure-Samples/todo-python-mongo-terraform`).
+This repository use the Azure Developer CLI (azd) as a base tool to interact with the Azure. You'll be able to deploy the complete infrastructure and applications with one command that you'll see soon. However, the practices mentioned here can also be performed without the CLI tool.
 
-This quickstart will show you how to authenticate on Azure, initialize using a template, provision infrastructure and deploy code on Azure via the following commands:
+Let's prepare your environment running the following commands in your terminal. Make sure you have the administrative priviledge.
+
+```bash
+# Log in to azd. Only required once per-install.
+azd auth login
+```
+
+The step below will make sure the CLI tool is autheticated on your Azure Subscription.
 
 ```bash
 # Log in to azd. Only required once per-install.
