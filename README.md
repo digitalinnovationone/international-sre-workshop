@@ -32,23 +32,39 @@ This repository use the Azure Developer CLI (azd) as a base tool to interact wit
 
 Let's prepare your environment running the following commands in your terminal. Make sure you have the administrative priviledge.
 
+The step following commando is necessary to make sure the CLI tool is autheticated on your Azure Subscription:
+
 ```bash
 # Log in to azd. Only required once per-install.
 azd auth login
 ```
 
-The step below will make sure the CLI tool is autheticated on your Azure Subscription.
+So now you're almost prepared to use the `azd` tool, and now is necessary to execute the following command to download the resources dependencies for the infrastructure, web and api projects. Clone your project in a folder of your machine, open the terminal and execute the following commando:
 
 ```bash
-# Log in to azd. Only required once per-install.
-azd auth login
-
 # First-time project setup. Initialize a project in the current directory, using this template. 
-azd init --template Azure-Samples/todo-python-mongo-terraform
-
-# Provision and deploy to Azure
-azd up
+azd init --template <yourgithubuser>/dio-sre-workshop
 ```
+
+If you want to deploy the entire environment, API, WEB and Infrastructure, you can run the command below. Everything will be provisioned automatically.
+```bash
+# Provision and deploy to Azure
+azd up -e <NameOfTheEnvironment>
+```
+
+If you want to destroy the environment, execute the following command:
+```bash
+# Provision and deploy to Azure
+azd down -e <NameOfTheEnvironment>
+```
+
+You can learn more about `azd` architecture in [the official documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible?pivots=azd-create#understand-the-azd-architecture).
+
+This project has 4 main projects:
+- Infra: Terraform scripts
+- src/Web: React project
+- src/api: Python project
+- Infra/Infra-example: A short terraform project to learn how to work with the GitActions
 
 ### Application Architecture
 
@@ -63,30 +79,14 @@ Here's a high level architecture diagram that illustrates these components. Noti
 
 !["Application architecture diagram"](assets/resources.png)
 
-> This template provisions resources to an Azure subscription that you will select upon provisioning them. Please refer to the [Pricing calculator for Microsoft Azure](https://azure.microsoft.com/pricing/calculator/) and, if needed, update the included Azure resource definitions found in `infra/main.bicep` to suit your needs.
-
-### Application Code
-
-This template is structured to follow the [Azure Developer CLI](https://aka.ms/azure-dev/overview). You can learn more about `azd` architecture in [the official documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible?pivots=azd-create#understand-the-azd-architecture).
 
 ### Next Steps
 
-At this point, you have a complete application deployed on Azure. But there is much more that the Azure Developer CLI can do. These next steps will introduce you to additional commands that will make creating applications on Azure much easier. Using the Azure Developer CLI, you can setup your pipelines, monitor your application, test and debug locally.
-
-> Note: Needs to manually install [setup-azd extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.azd) for Azure DevOps (azdo).
-
-- [`azd pipeline config`](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline?tabs=GitHub) - to configure a CI/CD pipeline (using GitHub Actions or Azure DevOps) to deploy your application whenever code is pushed to the main branch. 
-
-- [`azd monitor`](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app) - to monitor the application and quickly navigate to the various Application Insights dashboards (e.g. overview, live metrics, logs)
-
-- [Run and Debug Locally](https://learn.microsoft.com/azure/developer/azure-developer-cli/debug?pivots=ide-vs-code) - using Visual Studio Code and the Azure Developer CLI extension
-
-- [`azd down`](https://learn.microsoft.com/azure/developer/azure-developer-cli/reference#azd-down) - to delete all the Azure resources created with this template 
-
-- [Enable optional features, like APIM](./OPTIONAL_FEATURES.md) - for enhanced backend API protection and observability
 
 ### Additional `azd` commands
 
+You can deploy the project's Infra, Web or API separately. On the source of this repo, there is a file called `azure.yaml`. This is the configuration file of the `azd` CLI tool. 
+Based on this files you'll see three main groups `Infra`
 The Azure Developer CLI includes many other commands to help with your Azure development experience. You can view these commands at the terminal by running `azd help`. You can also view the full list of commands on our [Azure Developer CLI command](https://aka.ms/azure-dev/ref) page.
 
 ## Security
@@ -99,6 +99,3 @@ This template creates a [managed identity](https://docs.microsoft.com/azure/acti
 
 This template uses [Azure Key Vault](https://docs.microsoft.com/azure/key-vault/general/overview) to securely store your Cosmos DB connection string for the provisioned Cosmos DB account. Key Vault is a cloud service for securely storing and accessing secrets (API keys, passwords, certificates, cryptographic keys) and makes it simple to give other Azure services access to them. As you continue developing your solution, you may add as many secrets to your Key Vault as you require.
 
-## Reporting Issues and Feedback
-
-If you have any feature requests, issues, or areas for improvement, please [file an issue](https://aka.ms/azure-dev/issues). To keep up-to-date, ask questions, or share suggestions, join our [GitHub Discussions](https://aka.ms/azure-dev/discussions). You may also contact us via AzDevTeam@microsoft.com.
