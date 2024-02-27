@@ -1,4 +1,11 @@
 # ------------------------------------------------------------------------------------------------------
+# Deploy resource group
+# ------------------------------------------------------------------------------------------------------
+resource "azurerm_resource_group" "rg" {
+  name     = var.rg_name
+  location = var.location
+}
+# ------------------------------------------------------------------------------------------------------
 # Deploy app service plan
 # ------------------------------------------------------------------------------------------------------
 resource "azurecaf_name" "plan_name" {
@@ -11,7 +18,7 @@ resource "azurecaf_name" "plan_name" {
 resource "azurerm_service_plan" "plan" {
   name                = azurecaf_name.plan_name.result
   location            = var.default_location
-  resource_group_name = var.rg_name
+  resource_group_name = azurerm_resource_group.rg.name
   os_type             = "Linux"
   sku_name            = "B1"
 }
@@ -29,7 +36,7 @@ resource "azurecaf_name" "web_name" {
 resource "azurerm_linux_web_app" "web" {
   name                = azurecaf_name.web_name.result
   location            = var.default_location
-  resource_group_name = var.rg_name
+  resource_group_name = azurerm_resource_group.rg.name
   service_plan_id     = azurerm_service_plan.plan.id
   https_only          = true
 
