@@ -19,9 +19,9 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
     environment: 
-      name: ${{ github.ref == 'refs/heads/main' && 'prd' || 'dev' }}
+      name: 'dev' 
     env:
-      ENV_NAME: ${{ github.ref == 'refs/heads/main' && 'prd' || 'dev' }}
+      ENV_NAME: 'dev'
     defaults:
       run:
         working-directory: infra/infra-example
@@ -61,15 +61,15 @@ jobs:
           ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
 
       - name: Upload Terraform Plan
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: tfplan
           path: infra/infra-example/terraform.tfplan
   terraform_apply:
     needs: terraform
     runs-on: ubuntu-latest     
-    environment:
-      name: ${{ github.ref == 'refs/heads/main' && 'prd' || 'dev' }}
+    environment: 
+      name: 'dev'
     defaults:
       run:
         working-directory: infra/infra-example
@@ -96,7 +96,7 @@ jobs:
           ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
 
       - name: Download Terraform Plan
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: tfplan
           path: .
