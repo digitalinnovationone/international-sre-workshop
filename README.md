@@ -26,6 +26,7 @@ The following prerequisites are required to use this application. Please ensure 
 - [Node.js with npm (18.17.1+)](https://nodejs.org/) - for the Web frontend
 - [Terraform CLI](https://aka.ms/azure-dev/terraform-install)
     - Requires the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)
+- [Preparing this repository](docs/README.md)
 
 ### Quickstart
 This repository use the Azure Developer CLI (azd) as a base tool to interact with the Azure. You'll be able to deploy the complete infrastructure and applications with one command that you'll see soon. However, the practices mentioned here can also be performed without the CLI tool.
@@ -79,16 +80,16 @@ Here's a high level architecture diagram that illustrates these components. Noti
 
 !["Application architecture diagram"](assets/resources.png)
 
-
-### Next Steps
-
-
 ### Additional `azd` commands
 
 You can deploy the project's Infra, Web or API separately. On the source of this repo, there is a file called `azure.yaml`. This is the configuration file of the `azd` CLI tool. 
-Based on this files you'll see three main groups `Infra`
-The Azure Developer CLI includes many other commands to help with your Azure development experience. You can view these commands at the terminal by running `azd help`. You can also view the full list of commands on our [Azure Developer CLI command](https://aka.ms/azure-dev/ref) page.
+Based on this files you'll see three main groups `infra`, `web`and `api` and you make some changes on these projects, you can use the following command to deploy a specific project:
 
+```bash
+# deploying the web application
+azd deploy web -e <EnvironmentName>
+```
+    
 ## Security
 
 ### Roles
