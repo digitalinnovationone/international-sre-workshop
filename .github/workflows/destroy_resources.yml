@@ -1,0 +1,47 @@
+name: 'Terraform Destroy resources'
+
+on:
+  workflow_dispatch: # This enables manual triggers for the workflow
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  Terraform-destroy:
+    runs-on: ubuntu-latest
+    environment: 
+      name: 'dev' 
+    env:
+      ENV_NAME: 'dev'
+    defaults:
+      run:
+        working-directory: infra/infra-example
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.7.x"
+          terraform_wrapper: false
+
+      - name: 'Terraform Init'
+        run: |
+          terraform init \
+            -backend-config="resource_group_name=${{ vars.BACKEND_RG_NAME }}" \
+            -backend-config="storage_account_name=${{ vars.BACKEND_ST_NAME }}" \
+            -backend-config="container_name=${{ vars.BACKEND_CONTAINER_NAME }}" \
+            -backend-config="key=${{ vars.BACKEND_KEY }}.tfstate"
+
+      - name: 'Terraform Validate'
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan  -var-file="vars/${{ env.ENV_NAME }}.tfvars" -out="terraform.tfplan"
+       
+      - name: Terraform Destroy
+        run: terraform destroy  -auto-approve
+       
