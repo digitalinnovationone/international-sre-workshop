@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------------------------------
 resource "azurerm_resource_group" "rg" {
   name     = var.rg_name
-  location = var.location
+  location = var.default_location
 }
 # ------------------------------------------------------------------------------------------------------
 # Deploy app service plan
