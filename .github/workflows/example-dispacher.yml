@@ -64,7 +64,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: tfplan
-          path: .
+          path: infra/infra-example/terraform.tfplan
   terraform_apply:
     needs: terraform
     runs-on: ubuntu-latest     
@@ -81,6 +81,19 @@ jobs:
         with:
           terraform_version: 1.7.x
           terraform_wrapper: false
+          
+      - name: 'Terraform Init'
+        run: |
+          terraform init \
+            -backend-config="resource_group_name=${{ vars.BACKEND_RG_NAME }}" \
+            -backend-config="storage_account_name=${{ vars.BACKEND_ST_NAME }}" \
+            -backend-config="container_name=${{ vars.BACKEND_CONTAINER_NAME }}" \
+            -backend-config="key=${{ vars.BACKEND_KEY }}.tfstate"
+        env:
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
 
       - name: Download Terraform Plan
         uses: actions/download-artifact@v2
@@ -89,7 +102,7 @@ jobs:
           path: .
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve ./terraform.tfplan
+        run: terraform apply -auto-approve "${{ github.workspace }}/terraform.tfplan"
         env:
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
