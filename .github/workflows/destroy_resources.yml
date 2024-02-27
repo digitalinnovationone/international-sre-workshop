@@ -53,7 +53,7 @@ jobs:
           ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
        
       - name: Terraform Destroy
-        run: terraform destroy  -auto-approve
+        run: terraform destroy  -auto-approve TERRAFORM_ENVIRONMENT=${{env.ENV_NAME}}
         env:
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
