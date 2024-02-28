@@ -1,13 +1,13 @@
 # DIO SRE Workshop
 
-This repo was created based on the Microsoft's template [Azure-Samples/todo-python-mongo-terraform](htps://github.com/Azure-Samples/todo-python-mongo-terraform) to support the DIO SRE Workshop.
+This repo was created based on Microsoft's template [Azure-Samples/todo-python-mongo-terraform](htps://github.com/Azure-Samples/todo-python-mongo-terraform) to support the DIO SRE Workshop.
 
 # React Web App with Python API and MongoDB (Terraform) on Azure
 
-[![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=brightgreen&logo=github)](https://codespaces.new/tanure/todo-python-mongo-terraform)
-[![Open in Dev Container](https://img.shields.io/static/v1?style=for-the-badge&label=Dev+Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/tanure/todo-python-mongo-terraform)
+[![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=brightgreen&logo=github)](https://codespaces.new/digitalinnovationone/international-sre-workshop)
+[![Open in Dev Container](https://img.shields.io/static/v1?style=for-the-badge&label=Dev+Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/digitalinnovationone/international-sre-workshop)
 
-The wowkshop is based on a React web app with Python (FastAPI) API and a MongoDB database running on Azure. 
+The workshop is based on a React web app with Python (FastAPI) API and a MongoDB database running on Azure. 
 
 !["Screenshot of deployed ToDo app"](assets/web.png)
 
@@ -29,18 +29,18 @@ The following prerequisites are required to use this application. Please ensure 
 - [Preparing this repository](docs/README.md)
 
 ### Quickstart
-This repository use the Azure Developer CLI (azd) as a base tool to interact with the Azure. You'll be able to deploy the complete infrastructure and applications with one command that you'll see soon. However, the practices mentioned here can also be performed without the CLI tool.
+This repository uses the Azure Developer CLI (azd) as a base tool to interact with the Azure. You'll be able to deploy the complete infrastructure and applications with one command that you'll see soon. However, the practices mentioned here can also be performed without the CLI tool.
 
-Let's prepare your environment running the following commands in your terminal. Make sure you have the administrative priviledge.
+Let's prepare your environment by running the following commands in your terminal. Make sure you have the administrative privilege.
 
-The step following commando is necessary to make sure the CLI tool is autheticated on your Azure Subscription:
+The step following commando is necessary to make sure the CLI tool is authenticated on your Azure Subscription:
 
 ```bash
-# Log in to azd. Only required once per-install.
+# Log in to azd. Only required once pre-install.
 azd auth login
 ```
 
-So now you're almost prepared to use the `azd` tool, and now is necessary to execute the following command to download the resources dependencies for the infrastructure, web and api projects. Clone your project in a folder of your machine, open the terminal and execute the following commando:
+So now you're almost prepared to use the `azd` tool and now is necessary to execute the following command to download the dependencies of the resources for the infrastructure, web, and api projects. Clone your project in a folder of your machine, open the terminal and execute the following commando:
 
 ```bash
 # First-time project setup. Initialize a project in the current directory, using this template. 
@@ -76,14 +76,14 @@ This application utilizes the following Azure resources:
 - [**Azure Monitor**](https://docs.microsoft.com/azure/azure-monitor/) for monitoring and logging
 - [**Azure Key Vault**](https://docs.microsoft.com/azure/key-vault/) for securing secrets
 
-Here's a high level architecture diagram that illustrates these components. Notice that these are all contained within a single [resource group](https://docs.microsoft.com/azure/azure-resource-manager/management/manage-resource-groups-portal), that will be created for you when you create the resources.
+Here's a high-level architecture diagram that illustrates these components. Notice that these are all contained within a single [resource group](https://docs.microsoft.com/azure/azure-resource-manager/management/manage-resource-groups-portal), that will be created for you when you create the resources.
 
 !["Application architecture diagram"](assets/resources.png)
 
 ### Additional `azd` commands
 
 You can deploy the project's Infra, Web or API separately. On the source of this repo, there is a file called `azure.yaml`. This is the configuration file of the `azd` CLI tool. 
-Based on this files you'll see three main groups `infra`, `web`and `api` and you make some changes on these projects, you can use the following command to deploy a specific project:
+Based on these files you'll see three main groups `infra`, `web`, and `api` If you make some changes on these projects, you can use the following command to deploy a specific project:
 
 ```bash
 # deploying the web application
@@ -94,7 +94,7 @@ azd deploy web -e <EnvironmentName>
 
 ### Roles
 
-This template creates a [managed identity](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview) for your app inside your Azure Active Directory tenant, and it is used to authenticate your app with Azure and other services that support Azure AD authentication like Key Vault via access policies. You will see principalId referenced in the infrastructure as code files, that refers to the id of the currently logged in Azure Developer CLI user, which will be granted access policies and permissions to run the application locally. To view your managed identity in the Azure Portal, follow these [steps](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/how-to-view-managed-identity-service-principal-portal).
+This template creates a [managed identity](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview) for your app inside your Azure Active Directory tenant, and it is used to authenticate your app with Azure and other services that support Azure AD authentication like Key Vault via access policies. You will see principalId referenced in the infrastructure as code files, which refers to the id of the currently logged-in Azure Developer CLI user, which will be granted access policies and permissions to run the application locally. To view your managed identity in the Azure Portal, follow these [steps](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/how-to-view-managed-identity-service-principal-portal).
 
 ### Key Vault
 
