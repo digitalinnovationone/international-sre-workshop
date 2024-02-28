@@ -62,5 +62,16 @@ To configure variables and secrets on GitHub, follow these steps:
 - Click on `Configure Environment`
 - On the new screen, add the variables and secrets according to the tables described previously
 
-# Next Steps
+# Topics
+
+- Example Infrastructure - Terraform
+- Example Infrastructure - GitActions
+- Tips
+- Interview Tips
+
+# Challenges
+- Create a GitActions for the Web APP
+- Create a GitActions for the API
+- Restrict the main branch
+- Infracost and Pull Request
 
